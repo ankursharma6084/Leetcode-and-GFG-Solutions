@@ -1,7 +1,7 @@
 class Solution {
 public:
     int maxProduct(vector<int>& a) {
-        int ans = -1e9 , l = 0 , r = 0 ;
+        int ans = a[0] , l = 0 , r = 0 ;
         
         int n = a.size();
         
