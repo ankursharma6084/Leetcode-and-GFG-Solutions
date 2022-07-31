@@ -1,33 +1,26 @@
 class Solution {
 public:
-    int maxProduct(vector<int>& a) {
-        int ans = a[0] , l = 0 , r = 0 ;
-        
-        int n = a.size();
-        
-        for(int i=0; i<n; i++)
-        {
-           if(l == 0)
-           {
-               l = a[i] ;
-           }
-            
-            else{
-                l = l*a[i] ;
+    int maxProduct(vector<int>& A) {
+            int n = A.size();
+            if (n == 0) return 0;
+            int maxProduct = A[0];
+            int minProduct = A[0];
+            int maxRes = A[0];
+            for (int i = 1; i < n; i++)
+            {
+                if (A[i] >= 0)
+                {
+                    maxProduct = max(maxProduct * A[i], A[i]);
+                    minProduct = min(minProduct * A[i], A[i]);
+                }
+                else
+                {
+                    int temp = maxProduct;
+                    maxProduct = max(minProduct * A[i], A[i]);
+                    minProduct = min(temp * A[i], A[i]);
+                }
+                maxRes = max(maxRes, maxProduct);
             }
-            
-          if(r == 0)
-           {
-               r = a[n-1-i] ;
-           }
-            
-            else{
-                r = r*a[n-1-i] ;
-            }
-            
-            ans = max({ans , l , r});
-        }
-        
-        return ans ;
+            return maxRes;
     }
 };
