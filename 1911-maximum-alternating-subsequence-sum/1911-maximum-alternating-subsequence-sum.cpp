@@ -13,11 +13,26 @@ class Solution {
     }
     
 public:
-    long long maxAlternatingSum(vector<int>& nums) {
+    long long maxAlternating(vector<int>& nums) {
          
          int n = nums.size() ;
          vector<vector<long long>> dp(n , vector<long long>(2 , -1)) ;
         
          return max( solve(nums , 0 , dp , 0) , solve(nums , 0 , dp , 1) ) ;
     }
+    
+
+        typedef long long LL;
+        public:
+            long long maxAlternatingSum(vector<int>& A) {
+                LL N = A.size(), dp[2] = {};
+                for (int i = 0; i < N; ++i) {
+                    LL next[2] = {};
+                    next[0] = max(dp[1] + A[i], dp[0]);
+                    next[1] = max(dp[0] - A[i], dp[1]);
+                    swap(next, dp);
+                }
+                return dp[0];
+            }
+
 };
